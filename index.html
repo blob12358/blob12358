@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roue Oui/Non</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+    /* Code CSS directement dans HTML pour tester */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        margin: 0;
+    }
+
+    .wheel-container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 20px;
+    }
+
+    .wheel {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: conic-gradient(#dd1dc6 0deg 180deg, #000000 180deg 360deg);
+        transition: transform 2s ease-out;
+    }
+
+    .pointer {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid #333;
+    }
+</style>
+
 </head>
 <body>
     <div class="wheel-container">
