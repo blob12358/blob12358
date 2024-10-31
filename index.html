@@ -3,31 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T'es sur la bonne page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        h1 {
-            color: #4CAF50;
-        }
-        .qr-code {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%; 
-            overflow: hidden;
-        }C'est malin d'essayer de voir si y-a quelque chose ici, mais non...
-    </style>
+    <title>Roue Oui/Non</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>////In process\\\\</h1>
-    <p>Please come back later</p>
-  
-
-    <footer>
-        <p>Créé par Moi - <a href="https://github.com/blob12358">Blob12358</a></p>
-    </footer>
+    <div class="wheel-container">
+        <div id="wheel" class="wheel">
+            <div class="slice oui">Oui</div>
+            <div class="slice non">Non</div>
+        </div>
+        <button id="spin-button">Tourner la roue</button>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
