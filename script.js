@@ -1,21 +1,27 @@
 // script.js
+
+// Initialise l'angle de rotation cumulé
+let cumulativeRotation = 0;
+
+// Écouteur d'événement pour le bouton "Tourner la roue"
 document.getElementById('spin-button').addEventListener('click', function () {
     const wheel = document.getElementById('wheel');
     const resultDisplay = document.getElementById('result');
-    const randomRotation = Math.floor(5000 + Math.random() * 5000); // Rotation entre 5000 et 10000 degrés
-    let currentRotation = randomRotation % 360;
+    
+    // Génère une rotation aléatoire (entre 5000 et 10000 degrés)
+    const randomRotation = Math.floor(5000 + Math.random() * 5000);
+    cumulativeRotation += randomRotation; // On ajoute à l'angle cumulé
 
-    // Définir l'animation de rotation
+    // Applique l'angle de rotation cumulé à la roue
     wheel.style.transition = 'transform 4s ease-out';
-    wheel.style.transform = `rotate(${randomRotation}deg)`;
+    wheel.style.transform = `rotate(${cumulativeRotation}deg)`;
 
-    // Calculer le résultat une fois la rotation terminée
+    // Calcule et affiche le résultat une fois l'animation terminée
     setTimeout(() => {
-        wheel.style.transition = 'none';
-        wheel.style.transform = `rotate(${currentRotation}deg)`;
+        const normalizedRotation = cumulativeRotation % 360; // Réduit entre 0 et 360 degrés
+        const result = (normalizedRotation >= 0 && normalizedRotation < 180) ? 'Oui' : 'Non';
 
-        // Afficher le résultat en fonction de l'angle final
-        const result = (currentRotation >= 0 && currentRotation < 180) ? 'Oui' : 'Non';
+        // Met à jour le texte du résultat
         resultDisplay.textContent = `Résultat : ${result}`;
-    }, 4000); // Durée correspondante à l'animation
+    }, 4000); // Attend la fin de l'animation (4s)
 });
