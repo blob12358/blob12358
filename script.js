@@ -4,22 +4,35 @@ document.getElementById('spin-button').addEventListener('click', function () {
     const wheel = document.getElementById('wheel');
     const resultDisplay = document.getElementById('result');
 
-    // On génère une rotation aléatoire (entre 0 et 360 degrés) pour que le point d'arrêt soit prédictible
-    let baseRotation = Math.floor(Math.random() * 360);
-    const fullRotations = 1440; // 4 tours complets pour l'animation
-
-    // Déterminer le résultat en fonction de l'angle cible
-    const result = (baseRotation < 180) ? 'Oui' : 'Non';
-
-    // Ajout de l'angle de base à la rotation complète
-    const finalRotation = fullRotations + baseRotation;
-
-    // Applique la rotation avec transition
+    // Génère une rotation aléatoire (grande pour une meilleure animation visuelle)
+    const randomRotation = Math.floor(5000 + Math.random() * 5000);
+    
+    // Applique la rotation
     wheel.style.transition = 'transform 4s ease-out';
-    wheel.style.transform = `rotate(${finalRotation}deg)`;
+    wheel.style.transform = `rotate(${randomRotation}deg)`;
 
-    // Afficher le résultat après l'animation
-    setTimeout(() => {
+    // Écouteur d'événement pour détecter la fin de la transition
+    wheel.addEventListener('transitionend', function onTransitionEnd() {
+        // Calcul de l'angle final entre 0 et 360 degrés
+        const computedStyle = window.getComputedStyle(wheel);
+        const transformMatrix = computedStyle.transform;
+
+        // Extraction de l'angle de rotation à partir de la matrice de transformation
+        const values = transformMatrix.split('(')[1].split(')')[0].split(',');
+        const a = values[0];
+        const b = values[1];
+        let angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+
+        // Correction pour que l'angle soit positif
+        if (angle < 0) angle += 360;
+
+        // Déterminer le résultat en fonction de l'angle final
+        const result = (angle >= 0 && angle < 180) ? 'Oui' : 'Non';
+        
+        // Affiche le résultat
         resultDisplay.textContent = `Résultat : ${result}`;
-    }, 4000); // Durée correspondant à l'animation
+
+        // Supprime l'écouteur après l'exécution pour éviter plusieurs déclenchements
+        wheel.removeEventListener('transitionend', onTransitionEnd);
+    });
 });
