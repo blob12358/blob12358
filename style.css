@@ -55,3 +55,22 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+/* Pointeur */
+.pointer {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #333; /* Couleur du pointeur */
+    position: absolute;
+    top: 10px; /* Positionné légèrement au-dessus de la roue */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Roue avec un léger ajustement pour que le pointeur ne le chevauche pas */
+.wheel-container {
+    position: relative;
+}
