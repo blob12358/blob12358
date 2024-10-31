@@ -4,18 +4,16 @@ document.getElementById('spin-button').addEventListener('click', function () {
     const wheel = document.getElementById('wheel');
     const resultDisplay = document.getElementById('result');
 
-    // Détermine aléatoirement si le résultat sera "Oui" ou "Non"
-    const result = Math.random() < 0.5 ? 'Oui' : 'Non';
+    // Génère un angle entre 0 et 360 degrés
+    const angle = Math.floor(Math.random() * 360);
 
-    // Choisit l'angle de rotation final en fonction du résultat
-    const finalRotation = result === 'Oui' ? 1440 + 90 : 1440 + 270;
+    // Applique la rotation sans accumulation
+    wheel.style.transition = 'transform 3s ease-out';
+    wheel.style.transform = `rotate(${angle}deg)`;
 
-    // Applique la rotation avec transition
-    wheel.style.transition = 'transform 4s ease-out';
-    wheel.style.transform = `rotate(${finalRotation}deg)`;
-
-    // Affiche le résultat après l'animation
+    // Calculer le résultat en fonction de l'angle
     setTimeout(() => {
+        const result = (angle >= 0 && angle < 180) ? 'Oui' : 'Non';
         resultDisplay.textContent = `Résultat : ${result}`;
-    }, 4000); // Durée correspondant à l'animation
+    }, 3000); // Durée de l'animation
 });
